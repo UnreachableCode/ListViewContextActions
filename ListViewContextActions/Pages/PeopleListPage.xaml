@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:ListViewContextActions"
+             xmlns:viewCells="clr-namespace:ListViewContextActions.ViewCells"
+             x:Class="ListViewContextActions.Pages.PeopleListPage"
+             x:Name="peopleListPage">
+<ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="simplePersonItemViewCell">
+<!--                <viewCells:SimpleItemViewCell ReferencedPageModel="{Binding BindingContext, Source={x:Reference PersonItemListView}}"/>-->
+                <viewCells:SimpleItemViewCell />
+            </DataTemplate>
+            <viewCells:PersonItemDataTemplateSelector 
+                    x:Key="PersonItemDataTemplateSelector"
+                    SimpleTemplate="{StaticResource simplePersonItemViewCell}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="PersonItemListView"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="Fill"
+                      RowHeight="100"
+                      HasUnevenRows="True"
+                      BackgroundColor="Transparent"
+                      SeparatorVisibility="None"
+                      ItemsSource="{Binding PersonItems}" >
+<!--                      ItemTemplate="{StaticResource PersonItemDataTemplateSelector}" />-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Number}"
+                                  Detail="{Binding Name}">
+                            <TextCell.ContextActions>
+<!--                                <MenuItem Clicked="OnMore" CommandParameter="{Binding .}" Text="More" />-->
+                                <MenuItem Command="{Binding Path=BindingContext.DeleteSelectedCommand, Source={x:Reference peopleListPage}}" 
+                                          CommandParameter="{Binding .}" 
+                                          Text="Delete" 
+                                          IsDestructive="True" />
+                             </TextCell.ContextActions>
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+    

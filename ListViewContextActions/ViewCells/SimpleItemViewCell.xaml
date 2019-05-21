@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="ListViewContextActions.ViewCells.SimpleItemViewCell"
+            xmlns:viewcells="clr-namespace:ListViewContextActions.ViewCells"
+            xmlns="http://xamarin.com/schemas/2014/forms" 
+            Height="50">
+    <Frame CornerRadius="2.5"
+            Margin="5, 2.5"
+            Padding="10" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Text="{Binding Number}" 
+                   FontSize="Large" />
+            <Label x:Name="PossiblyInvisibleLabel"
+                   Grid.Column="1"
+                   HorizontalOptions="Start"
+                   Text="{Binding Name}" 
+                   TextColor="Black" 
+                   FontSize="Large" 
+                   LineBreakMode="TailTruncation"/>
+        </Grid>
+    </Frame>
+</ViewCell>
